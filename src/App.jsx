@@ -1,16 +1,17 @@
 import React from 'react';
 import './App.css';
-import requestAllPokemons from './API/Requests';
+import {
+  Route, createBrowserRouter, createRoutesFromElements,
+} from 'react-router-dom';
+import Home from './Pages/Home';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Olá Mundo!</p>
-        <button type="button" onClick={requestAllPokemons}>Chama API</button>
-      </header>
-    </div>
-  );
-}
+const App = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Home />}>
+      {/* <Route path="dashboard" element={<Dashboard />} />
+      <Route path="about" element={<About />} /> */}
+    </Route>,
+  ),
+);
 
 export default App;
