@@ -19,5 +19,11 @@
     ],
     "rules": {
         "linebreak-style": 0
+    },
+    "settings": {
+        "import/extensions": [
+            ".js",
+            ".jsx"
+        ]
     }
 }
