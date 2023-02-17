@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// import PropTypes from 'prop-types';
 import Loading from '../Helpers/Loading';
+import PokemonDetails from '../Components/Pokemon';
 
 function App() {
-  const [dataPokemon, setDataPokemon] = useState(null);
+  const [dataPokemon, setDataPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPokemon = async () => {
     try {
       const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
       const { data } = response;
-      console.log(data.results);
       setDataPokemon(data.results);
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     } finally {
       setIsLoading(false);
     }
@@ -25,15 +26,18 @@ function App() {
 
   return (
     <div>
-      <h1>Pokémon List</h1>
+      <h1>Lista de Pokémons</h1>
       {isLoading ? (
         <Loading />
       ) : (
-        <ul>
+        <div>
           {dataPokemon.map((p) => (
-            <li key={p.name}>{p.name}</li>
+            <PokemonDetails
+              key={p.name}
+              url={p.url}
+            />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
