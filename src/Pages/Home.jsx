@@ -5,6 +5,7 @@ import Loading from '../Helpers/Loading';
 import PokemonDetails from '../Components/Pokemon';
 
 function App() {
+  const [resultPokemon, setResultPokemon] = useState([]);
   const [dataPokemon, setDataPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,11 +13,34 @@ function App() {
     try {
       const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
       const { data } = response;
-      setDataPokemon(data.results);
+      setDataPokemon(data);
+      setResultPokemon(data.results);
     } catch (error) {
       throw new Error(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchMorePokemon = async () => {
+    try {
+      const response = await axios.get(dataPokemon.next);
+      const { data } = response;
+      setDataPokemon(data);
+      setResultPokemon([...data.results]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const fetchPreviousPokemon = async () => {
+    try {
+      const response = await axios.get(dataPokemon.previous);
+      const { data } = response;
+      setDataPokemon(data);
+      setResultPokemon([...data.results]);
+    } catch (error) {
+      throw new Error(error);
     }
   };
 
@@ -31,7 +55,7 @@ function App() {
         <Loading />
       ) : (
         <div>
-          {dataPokemon.map((p) => (
+          {resultPokemon.map((p) => (
             <PokemonDetails
               key={p.name}
               url={p.url}
@@ -39,6 +63,18 @@ function App() {
           ))}
         </div>
       )}
+      <button
+        onClick={fetchPreviousPokemon}
+        type="button"
+      >
+        Carregar anterior
+      </button>
+      <button
+        onClick={fetchMorePokemon}
+        type="button"
+      >
+        Carregar mais
+      </button>
     </div>
   );
 }
