@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Loading from '../Helpers/Loading';
 
 function PokemonDetails({ url }) {
-  const [pokemonDetails, setPokemonDetails] = useState([]);
+  const [pokemonDetails, setPokemonDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -12,8 +12,9 @@ function PokemonDetails({ url }) {
       try {
         const response = await axios.get(url);
         setPokemonDetails(response.data);
+        console.log(response.data);
       } catch (error) {
-        throw new Error(error);
+        console.error('Failed to fetch Pokemon:', error);
       } finally {
         setIsLoading(false);
       }
@@ -26,25 +27,35 @@ function PokemonDetails({ url }) {
     return <Loading />;
   }
 
+  const {
+    name, sprites, types, height, weight,
+  } = pokemonDetails;
+  const typeText = types.length === 1 ? 'Tipo:' : 'Tipos:';
+  const typeNames = types.map((type) => type.type.name).join(', ');
+
   return (
     <div>
-      <h2>{pokemonDetails.name}</h2>
-      <img src={pokemonDetails.sprites.front_default} alt={pokemonDetails.name} />
+      <h2>{name}</h2>
+      {sprites.front_default !== null ? (
+        <img src={sprites.front_default} alt={name} />
+      ) : (
+        <p>Ops! Foto não encontrada.</p>
+      )}
       <p>
-        <b>Tipo:</b>
+        <b>{typeText}</b>
         {' '}
-        {pokemonDetails.types[0].type.name}
+        {typeNames}
       </p>
       <p>
         <b>Altura:</b>
         {' '}
-        {pokemonDetails.height / 10}
+        {(height / 10).toFixed(1)}
         m
       </p>
       <p>
         <b>Peso:</b>
         {' '}
-        {pokemonDetails.weight / 10}
+        {(weight / 10).toFixed(1)}
         kg
       </p>
     </div>
