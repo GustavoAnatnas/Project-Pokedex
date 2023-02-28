@@ -12,7 +12,6 @@ function PokemonDetails({ url }) {
       try {
         const response = await axios.get(url);
         setPokemonDetails(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Failed to fetch Pokemon:', error);
       } finally {
@@ -34,7 +33,7 @@ function PokemonDetails({ url }) {
   const typeNames = types.map((type) => type.type.name).join(', ');
 
   return (
-    <div>
+    <div className="bg-gray-300 h-full w-9/12 flex-1 p-4">
       <h2>{name}</h2>
       {sprites.front_default !== null ? (
         <img src={sprites.front_default} alt={name} />

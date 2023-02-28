@@ -3,6 +3,7 @@ import axios from 'axios';
 // import PropTypes from 'prop-types';
 import Loading from '../Helpers/Loading';
 import PokemonDetails from '../Components/Pokemon';
+import Header from '../Components/Header';
 
 function App() {
   const [resultPokemon, setResultPokemon] = useState([]);
@@ -11,7 +12,8 @@ function App() {
 
   const fetchPokemon = async () => {
     try {
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon');
+      const url = 'https://pokeapi.co/api/v2/pokemon';
+      const response = await axios.get(url);
       const { data } = response;
       setDataPokemon(data);
       setResultPokemon(data.results);
@@ -49,12 +51,12 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Lista de Pokémons</h1>
+    <div className="bg-gray-700 text-white">
+      <Header />
       {isLoading ? (
         <Loading />
       ) : (
-        <div>
+        <div className="grid place-items-center grid-cols-1 grid-rows-2 mobile:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5 gap-4">
           {resultPokemon.map((p) => (
             <PokemonDetails
               key={p.name}
