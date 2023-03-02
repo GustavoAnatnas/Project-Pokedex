@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Loading from '../Helpers/Loading';
 
-function PokemonDetails({ url }) {
+function PokemonCards({ url }) {
   const [pokemonDetails, setPokemonDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,7 +33,7 @@ function PokemonDetails({ url }) {
   const typeNames = types.map((type) => type.type.name).join(', ');
 
   return (
-    <div className="bg-gray-300 h-full w-9/12 flex-1 p-4 rounded-lg shadow-md hover:shadow-indigo-500 hover:scale-110">
+    <div className="bg-gray-300 h-full w-9/12 flex-1 p-4 rounded-lg shadow-md hover:shadow-indigo-500 hover:scale-">
       <h2>{name}</h2>
       {sprites.front_default !== null ? (
         <img src={sprites.front_default} alt={name} />
@@ -61,8 +61,8 @@ function PokemonDetails({ url }) {
   );
 }
 
-PokemonDetails.propTypes = {
+PokemonCards.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-export default PokemonDetails;
+export default PokemonCards;

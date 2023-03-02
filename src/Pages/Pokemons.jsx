@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
 import Loading from '../Helpers/Loading';
-import PokemonDetails from '../Components/Pokemon';
+import PokemonCards from '../Components/PokemonCards';
 import Header from '../Components/Header';
 
-function App() {
+function Pokemons() {
   const [resultPokemon, setResultPokemon] = useState([]);
   const [dataPokemon, setDataPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,14 +51,14 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-100 text-white">
+    <div className="bg-gray-100">
       <Header />
       {isLoading ? (
         <Loading />
       ) : (
         <div className="grid place-items-center grid-cols-1 grid-rows-2 mobile:grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 desktop:grid-cols-5 gap-4">
           {resultPokemon.map((p) => (
-            <PokemonDetails
+            <PokemonCards
               key={p.name}
               url={p.url}
             />
@@ -81,4 +81,4 @@ function App() {
   );
 }
 
-export default App;
+export default Pokemons;
