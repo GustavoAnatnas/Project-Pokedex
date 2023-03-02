@@ -51,7 +51,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-700 text-white">
+    <div className="bg-gray-100 text-white">
       <Header />
       {isLoading ? (
         <Loading />

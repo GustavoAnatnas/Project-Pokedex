@@ -15,6 +15,9 @@ module.exports = {
         purple: colors.violet,
         yellow: colors.amber,
         pink: colors.fuchsia,
+        cyan: colors.cyan,
+        red: colors.red,
+        indigo: colors.indigo,
       },
       screens: {
         'mobile': '350px',

@@ -33,7 +33,7 @@ function PokemonDetails({ url }) {
   const typeNames = types.map((type) => type.type.name).join(', ');
 
   return (
-    <div className="bg-gray-300 h-full w-9/12 flex-1 p-4">
+    <div className="bg-gray-300 h-full w-9/12 flex-1 p-4 rounded-lg shadow-md hover:shadow-indigo-500 hover:scale-110">
       <h2>{name}</h2>
       {sprites.front_default !== null ? (
         <img src={sprites.front_default} alt={name} />
