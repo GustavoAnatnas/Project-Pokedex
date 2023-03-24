@@ -65,18 +65,23 @@ function Pokemons() {
           ))}
         </div>
       )}
-      <button
-        onClick={fetchPreviousPokemon}
-        type="button"
-      >
-        Carregar anterior
-      </button>
-      <button
-        onClick={fetchMorePokemon}
-        type="button"
-      >
-        Carregar mais
-      </button>
+      <nav className="flex justify-around items-center mt-10">
+
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={fetchPreviousPokemon}
+          type="button"
+        >
+          Carregar anterior
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={fetchMorePokemon}
+          type="button"
+        >
+          Carregar mais
+        </button>
+      </nav>
     </div>
   );
 }

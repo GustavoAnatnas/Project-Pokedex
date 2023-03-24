@@ -18,6 +18,7 @@ module.exports = {
         cyan: colors.cyan,
         red: colors.red,
         indigo: colors.indigo,
+        blue: colors.blue,
       },
       screens: {
         'mobile': '350px',
